@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+MEMCACHED_IMAGE="memcached"
+MEMCACHED_IMAGE_VERSION=1.4.24
+MEMCACHED_ROOT=/var/lib/dokku/services/memcached
+
+PLUGIN_DATA_ROOT=$MEMCACHED_ROOT
+PLUGIN_SERVICE="Memcached"
+PLUGIN_IMAGE=$MEMCACHED_IMAGE
+PLUGIN_IMAGE_VERSION=$MEMCACHED_IMAGE_VERSION
+
+if ! docker images | grep -e "^$PLUGIN_IMAGE " | grep -q $PLUGIN_IMAGE_VERSION ; then
+  docker pull $PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION
+fi
+
+mkdir -p $PLUGIN_DATA_ROOT || echo "Failed to create $PLUGIN_SERVICE directory"
+chown dokku:dokku $PLUGIN_DATA_ROOT
