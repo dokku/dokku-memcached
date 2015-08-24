@@ -47,7 +47,7 @@ dokku memcached:create lolipop
 # it *must* be compatible with the
 # official memcached image
 export MEMCACHED_IMAGE="memcached"
-export MEMCACHED_IMAGE_VERSION="2.8.21"
+export MEMCACHED_IMAGE_VERSION="1.4"
 dokku memcached:create lolipop
 
 # get connection information as follows
