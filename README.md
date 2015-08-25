@@ -11,7 +11,7 @@ Official memcached plugin for dokku. Currently installs memcached 1.4.24.
 
 ```
 cd /var/lib/dokku/plugins
-git clone https://github.com/dokku/dokku-memcached-plugin.git memcached
+git clone https://github.com/dokku/dokku-memcached.git memcached
 dokku plugins-install-dependencies
 dokku plugins-install
 ```
