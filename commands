@@ -2,16 +2,7 @@
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 source "$(dirname "$0")/../common/functions"
 source "$(dirname "$0")/functions"
-
-MEMCACHED_IMAGE=${MEMCACHED_IMAGE:="memcached"}
-MEMCACHED_IMAGE_VERSION=${MEMCACHED_IMAGE_VERSION:="1.4.24"}
-MEMCACHED_ROOT=/var/lib/dokku/services/memcached
-
-PLUGIN_COMMAND_PREFIX="memcached"
-PLUGIN_DATA_ROOT=$MEMCACHED_ROOT
-PLUGIN_SERVICE="Memcached"
-PLUGIN_IMAGE=$MEMCACHED_IMAGE
-PLUGIN_IMAGE_VERSION=$MEMCACHED_IMAGE_VERSION
+source "$(dirname "$0")/config"
 
 if [[ ! -d $PLUGIN_DATA_ROOT ]]; then
   dokku_log_fail "$PLUGIN_SERVICE: Please run: sudo dokku plugins-install"
