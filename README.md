@@ -24,16 +24,17 @@ memcached:clone <name> <new-name>  NOT IMPLEMENTED
 memcached:connect <name>           Connect via telnet to a memcached service
 memcached:create <name>            Create a memcached service
 memcached:destroy <name>           Delete the service and stop its container if there are no links left
-memcached:export <name>            NOT IMPLEMENTED
+memcached:expose <name> [port]     Expose a memcached service on custom port if provided (random port otherwise)
 memcached:expose <name> <port>     NOT IMPLEMENTED
 memcached:import <name> <file>     NOT IMPLEMENTED
 memcached:info <name>              Print the connection information
 memcached:link <name> <app>        Link the memcached service to the app
 memcached:list                     List all memcached services
 memcached:logs <name> [-t]         Print the most recent log(s) for this service
-memcached:restart <name>           Graceful shutdown and restart of the service container
-memcached:unexpose <name> <port>   NOT IMPLEMENTED
-memcached:unlink <name> <app>      Unlink the memcached service from the app
+memcached:restart <name>           Graceful shutdown and restart of the memcached service container
+memcached:start <name>             Start a previously stopped memcached service
+memcached:stop <name>              Stop a running memcached service
+memcached:unexpose <name>          Unexpose a previously exposed memcached service
 ```
 
 ## usage
@@ -65,7 +66,7 @@ dokku memcached:link lolipop playground
 # the above will expose the following environment variables
 #
 #   MEMCACHED_URL=memcached://172.17.0.1:11211
-#   MEMCACHED_NAME=/playground/DATABASE
+#   MEMCACHED_NAME=/lolipop/DATABASE
 #   MEMCACHED_PORT=tcp://172.17.0.1:11211
 #   MEMCACHED_PORT_11211_TCP=tcp://172.17.0.1:11211
 #   MEMCACHED_PORT_11211_TCP_PROTO=tcp
@@ -85,11 +86,10 @@ dokku memcached:logs lolipop
 dokku memcached:logs lolipop -t # to tail
 
 # finally, you can destroy the container
-dokku memcached:destroy playground
+dokku memcached:destroy lolipop
 ```
 
 ## todo
 
 - implement memcached:clone
-- implement memcached:expose
 - implement memcached:import
