@@ -4,8 +4,8 @@ Official memcached plugin for dokku. Currently installs memcached 1.4.24.
 
 ## requirements
 
-- dokku 0.3.25+
-- docker 1.6.x
+- dokku 0.4.0+
+- docker 1.8.x
 
 ## installation
 
