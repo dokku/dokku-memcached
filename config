@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 export MEMCACHED_IMAGE=${MEMCACHED_IMAGE:="memcached"}
 export MEMCACHED_IMAGE_VERSION=${MEMCACHED_IMAGE_VERSION:="1.4.24"}
-export MEMCACHED_ROOT=/var/lib/dokku/services/memcached
+export MEMCACHED_ROOT=${MEMCACHED_ROOT:="/var/lib/dokku/services/memcached"}
 
 export PLUGIN_COMMAND_PREFIX="memcached"
-export PLUGIN_DATA_ROOT=${PLUGIN_DATA_ROOT:="$MEMCACHED_ROOT"}
+export PLUGIN_DATA_ROOT=$MEMCACHED_ROOT
 export PLUGIN_DATASTORE_PORTS=(11211)
 export PLUGIN_DEFAULT_ALIAS="MEMCACHED"
 export PLUGIN_IMAGE=$MEMCACHED_IMAGE
