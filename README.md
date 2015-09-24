@@ -76,6 +76,10 @@ dokku memcached:link lolipop playground
 #   MEMCACHED_PORT_11211_TCP_PORT=11211
 #   MEMCACHED_PORT_11211_TCP_ADDR=172.17.0.1
 
+# you can examine the environment variables
+# using our 'playground' app's env command
+dokku run playground env
+
 # you can customize the environment
 # variables through a custom docker link alias
 dokku memcached:alias lolipop MEMCACHED_DATABASE
