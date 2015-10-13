@@ -97,22 +97,6 @@ case "$1" in
     service_unlink "$2" "$3"
     ;;
 
-  $PLUGIN_COMMAND_PREFIX:export)
-    [[ -z $2 ]] && dokku_log_fail "Please specify a name for the service"
-    verify_service_name "$2"
-    SERVICE="$2"; SERVICE_ROOT="$PLUGIN_DATA_ROOT/$SERVICE"
-
-    dokku_log_fail "Not yet implemented"
-    ;;
-
-  $PLUGIN_COMMAND_PREFIX:import)
-    [[ -z $2 ]] && dokku_log_fail "Please specify a name for the service"
-    verify_service_name "$2"
-    SERVICE="$2"
-
-    dokku_log_fail "Not yet implemented"
-    ;;
-
   $PLUGIN_COMMAND_PREFIX:logs)
     [[ -z $2 ]] && dokku_log_fail "Please specify a name for the service"
     verify_service_name "$2"
@@ -159,14 +143,6 @@ case "$1" in
     service_list
     ;;
 
-  $PLUGIN_COMMAND_PREFIX:clone)
-    [[ -z $2 ]] && dokku_log_fail "Please specify a name for the service"
-    verify_service_name "$2"
-    SERVICE="$2"
-
-    dokku_log_fail "Not yet implemented"
-    ;;
-
   $PLUGIN_COMMAND_PREFIX:expose)
     [[ -z $2 ]] && dokku_log_fail "Please specify a name for the service"
     verify_service_name "$2"
@@ -193,14 +169,11 @@ case "$1" in
     $PLUGIN_COMMAND_PREFIX:destroy <name>, Delete the $PLUGIN_SERVICE service and stop its container if there are no links left
     $PLUGIN_COMMAND_PREFIX:link <name> <app>, Link the $PLUGIN_SERVICE service to the app
     $PLUGIN_COMMAND_PREFIX:unlink <name> <app>, Unlink the $PLUGIN_SERVICE service from the app
-    $PLUGIN_COMMAND_PREFIX:export <name>, NOT IMPLEMENTED
-    $PLUGIN_COMMAND_PREFIX:import <name> <file>, NOT IMPLEMENTED
     $PLUGIN_COMMAND_PREFIX:connect <name>, Connect via telnet to a $PLUGIN_SERVICE service
     $PLUGIN_COMMAND_PREFIX:logs <name> [-t], Print the most recent log(s) for this service
     $PLUGIN_COMMAND_PREFIX:restart <name>, Graceful shutdown and restart of the $PLUGIN_SERVICE service container
     $PLUGIN_COMMAND_PREFIX:info <name>, Print the connection information
     $PLUGIN_COMMAND_PREFIX:list, List all $PLUGIN_SERVICE services
-    $PLUGIN_COMMAND_PREFIX:clone <name> <new-name>, NOT IMPLEMENTED
     $PLUGIN_COMMAND_PREFIX:expose <name> [port], Expose a $PLUGIN_SERVICE service on custom port if provided (random port otherwise)
     $PLUGIN_COMMAND_PREFIX:unexpose <name>, Unexpose a previously exposed $PLUGIN_SERVICE service
     $PLUGIN_COMMAND_PREFIX:start <name>, Start a previously stopped $PLUGIN_SERVICE service

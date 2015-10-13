@@ -22,13 +22,10 @@ dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ## commands
 
 ```
-memcached:clone <name> <new-name>  NOT IMPLEMENTED
 memcached:connect <name>           Connect via telnet to a memcached service
 memcached:create <name>            Create a memcached service
 memcached:destroy <name>           Delete the service and stop its container if there are no links left
 memcached:expose <name> [port]     Expose a memcached service on custom port if provided (random port otherwise)
-memcached:expose <name> <port>     NOT IMPLEMENTED
-memcached:import <name> <file>     NOT IMPLEMENTED
 memcached:info <name>              Print the connection information
 memcached:link <name> <app>        Link the memcached service to the app
 memcached:list                     List all memcached services
@@ -111,8 +108,3 @@ dokku memcached:logs lolipop -t # to tail
 # finally, you can destroy the container
 dokku memcached:destroy lolipop
 ```
-
-## todo
-
-- implement memcached:clone
-- implement memcached:import
