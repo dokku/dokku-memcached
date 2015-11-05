@@ -23,7 +23,7 @@ dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 
 ```
 memcached:connect <name>           Connect via telnet to a memcached service
-memcached:create <name>            Create a memcached service
+memcached:create <name>            Create a memcached service with environment variables
 memcached:destroy <name>           Delete the service and stop its container if there are no links left
 memcached:expose <name> [port]     Expose a memcached service on custom port if provided (random port otherwise)
 memcached:info <name>              Print the connection information
@@ -49,6 +49,13 @@ dokku memcached:create lolipop
 # official memcached image
 export MEMCACHED_IMAGE="memcached"
 export MEMCACHED_IMAGE_VERSION="1.4"
+
+# you can also specify custom environment
+# variables to start the memcached service
+# in semi-colon separated forma
+export MEMCACHED_CUSTOM_ENV="USER=alpha;HOST=beta"
+
+# create a memcached service
 dokku memcached:create lolipop
 
 # get connection information as follows
