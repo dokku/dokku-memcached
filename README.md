@@ -1,6 +1,6 @@
 # dokku memcached (beta) [![Build Status](https://img.shields.io/travis/dokku/dokku-memcached.svg?branch=master "Build Status")](https://travis-ci.org/dokku/dokku-memcached) [![IRC Network](https://img.shields.io/badge/irc-freenode-blue.svg "IRC Freenode")](https://webchat.freenode.net/?channels=dokku)
 
-Official memcached plugin for dokku. Currently defaults to installing [memcached 1.4.24](https://hub.docker.com/_/memcached/).
+Official memcached plugin for dokku. Currently defaults to installing [memcached 1.4.25](https://hub.docker.com/_/memcached/).
 
 ## requirements
 
