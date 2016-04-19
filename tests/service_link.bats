@@ -58,3 +58,11 @@ teardown() {
   assert_contains "${lines[*]}" "--link dokku.memcached.l:dokku-memcached-l"
   dokku "$PLUGIN_COMMAND_PREFIX:unlink" l my_app
 }
+
+@test "($PLUGIN_COMMAND_PREFIX:link) uses apps MEMCACHED_DATABASE_SCHEME variable" {
+  dokku config:set my_app MEMCACHED_DATABASE_SCHEME=memcached2
+  dokku "$PLUGIN_COMMAND_PREFIX:link" l my_app
+  url=$(dokku config:get my_app MEMCACHED_URL)
+  assert_contains "$url" "memcached2://dokku-memcached-l:11211"
+  dokku "$PLUGIN_COMMAND_PREFIX:unlink" l my_app
+}
