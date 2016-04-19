@@ -117,3 +117,30 @@ dokku memcached:logs lolipop -t # to tail
 # finally, you can destroy the container
 dokku memcached:destroy lolipop
 ```
+
+## Changing database adapter
+
+It's possible to change the protocol for MEMCACHED_URL by setting
+the environment variable MEMCACHED_DATABASE_SCHEME on the app:
+
+```
+dokku config:set playground MEMCACHED_DATABASE_SCHEME=memcached2
+dokku memcached:link lolipop playground
+```
+
+Will cause MEMCACHED_URL to be set as
+memcached2://dokku-memcached-lolipop:11211
+
+CAUTION: Changing MEMCACHED_DATABASE_SCHEME after linking will cause dokku to
+believe the memcached is not linked when attempting to use `dokku memcached:unlink`
+or `dokku memcached:promote`.
+You should be able to fix this by
+
+- Changing MEMCACHED_URL manually to the new value.
+
+OR
+
+- Set MEMCACHED_DATABASE_SCHEME back to its original setting
+- Unlink the service
+- Change MEMCACHED_DATABASE_SCHEME to the desired setting
+- Relink the service
