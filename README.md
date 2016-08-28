@@ -45,17 +45,25 @@ dokku memcached:create lolipop
 # official memcached image
 export MEMCACHED_IMAGE="memcached"
 export MEMCACHED_IMAGE_VERSION="1.4"
+dokku memcached:create lolipop
 
 # you can also specify custom environment
 # variables to start the memcached service
 # in semi-colon separated forma
 export MEMCACHED_CUSTOM_ENV="USER=alpha;HOST=beta"
-
-# create a memcached service
 dokku memcached:create lolipop
 
 # get connection information as follows
 dokku memcached:info lolipop
+
+# you can also retrieve a specific piece of service info via flags
+dokku memcached:info lolipop --config-dir
+dokku memcached:info lolipop --data-dir
+dokku memcached:info lolipop --dsn
+dokku memcached:info lolipop --exposed-ports
+dokku memcached:info lolipop --links
+dokku memcached:info lolipop --status
+dokku memcached:info lolipop --version
 
 # a memcached service can be linked to a
 # container this will use native docker
