@@ -17,10 +17,14 @@ sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ## commands
 
 ```
+memcached:clone <name> <new-name>  NOT IMPLEMENTED
 memcached:connect <name>           Connect via telnet to a memcached service
 memcached:create <name>            Create a memcached service with environment variables
 memcached:destroy <name>           Delete the service and stop its container if there are no links left
+memcached:enter <name> [command]   Enter a running couchdb service or run a command
+memcached:export <name> > <file>   NOT IMPLEMENTED
 memcached:expose <name> [port]     Expose a memcached service on custom port if provided (random port otherwise)
+memcached:import <name> <file>     NOT IMPLEMENTED
 memcached:info <name>              Print the connection information
 memcached:link <name> <app>        Link the memcached service to the app
 memcached:list                     List all memcached services
@@ -67,6 +71,14 @@ dokku memcached:info lolipop --links
 dokku memcached:info lolipop --service-root
 dokku memcached:info lolipop --status
 dokku memcached:info lolipop --version
+
+# a bash prompt can be opened against a running service
+# filesystem changes will not be saved to disk
+dokku memcached:enter lolipop
+
+# you may also run a command directly against the service
+# filesystem changes will not be saved to disk
+dokku memcached:enter lolipop ls -lah /
 
 # a memcached service can be linked to a
 # container this will use native docker
