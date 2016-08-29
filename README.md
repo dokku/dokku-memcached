@@ -21,7 +21,7 @@ memcached:clone <name> <new-name>  NOT IMPLEMENTED
 memcached:connect <name>           Connect via telnet to a memcached service
 memcached:create <name>            Create a memcached service with environment variables
 memcached:destroy <name>           Delete the service and stop its container if there are no links left
-memcached:enter <name> [command]   Enter a running couchdb service or run a command
+memcached:enter <name> [command]   Enter or run a command in a running memcached service container
 memcached:export <name> > <file>   NOT IMPLEMENTED
 memcached:expose <name> [port]     Expose a memcached service on custom port if provided (random port otherwise)
 memcached:import <name> <file>     NOT IMPLEMENTED
