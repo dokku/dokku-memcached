@@ -64,6 +64,7 @@ dokku memcached:info lolipop --exposed-ports
 dokku memcached:info lolipop --id
 dokku memcached:info lolipop --internal-ip
 dokku memcached:info lolipop --links
+dokku memcached:info lolipop --service-root
 dokku memcached:info lolipop --status
 dokku memcached:info lolipop --version
 
