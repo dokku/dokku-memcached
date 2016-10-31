@@ -17,6 +17,11 @@ sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ## commands
 
 ```
+memcached:backup <name> <bucket>   NOT IMPLEMENTED
+memcached:backup-auth <name> <aws_access_key_id> <aws_secret_access_key> NOT IMPLEMENTED
+memcached:backup-deauth <name>     NOT IMPLEMENTED
+memcached:backup-schedule <name> <schedule> <bucket> NOT IMPLEMENTED
+memcached:backup-unschedule <name> NOT IMPLEMENTED
 memcached:clone <name> <new-name>  NOT IMPLEMENTED
 memcached:connect <name>           Connect via telnet to a memcached service
 memcached:create <name>            Create a memcached service with environment variables
