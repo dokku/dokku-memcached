@@ -32,6 +32,12 @@ service_create() {
   else
     echo "" > "$SERVICE_ROOT/ENV"
   fi
+
+  if [[ -n "$SERVICE_MEMORY" ]]; then
+    echo "$SERVICE_MEMORY" > "$SERVICE_ROOT/SERVICE_MEMORY"
+  else
+    echo "64" > "$SERVICE_ROOT/SERVICE_MEMORY"
+  fi
   service_create_container "$SERVICE"
 }
 
@@ -39,8 +45,12 @@ service_create_container() {
   local SERVICE="$1"
   local SERVICE_ROOT="$PLUGIN_DATA_ROOT/$SERVICE"
   local SERVICE_NAME="$(get_service_name "$SERVICE")"
+  local SERVICE_MEMORY="64"
 
-  ID=$(docker run --name "$SERVICE_NAME" --env-file="$SERVICE_ROOT/ENV" -d --restart always --label dokku=service --label dokku.service=memcached "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" memcached -m 64)
+  [[ -f "$SERVICE_ROOT/SERVICE_MEMORY" ]] && SERVICE_MEMORY="$(cat "$SERVICE_ROOT/SERVICE_MEMORY")"
+  [[ -z "$SERVICE_MEMORY" ]] && SERVICE_MEMORY="64"
+
+  ID=$(docker run --name "$SERVICE_NAME" --env-file="$SERVICE_ROOT/ENV" -d --restart always --label dokku=service --label dokku.service=memcached "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" memcached -m "$SERVICE_MEMORY")
   echo "$ID" > "$SERVICE_ROOT/ID"
 
   dokku_log_verbose_quiet "Waiting for container to be ready"
