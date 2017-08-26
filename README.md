@@ -17,7 +17,7 @@ sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ## commands
 
 ```
-memcached:backup <name> <bucket>   NOT IMPLEMENTED
+memcached:backup <name> <bucket> [--use-iam] NOT IMPLEMENTED
 memcached:backup-auth <name> <aws_access_key_id> <aws_secret_access_key> (<aws_default_region>) (<aws_signature_version>) (<endpoint_url>) NOT IMPLEMENTED
 memcached:backup-deauth <name>     NOT IMPLEMENTED
 memcached:backup-schedule <name> <schedule> <bucket> NOT IMPLEMENTED
@@ -58,7 +58,7 @@ dokku memcached:create lolipop
 
 # you can also specify custom environment
 # variables to start the memcached service
-# in semi-colon separated forma
+# in semi-colon separated form
 export MEMCACHED_CUSTOM_ENV="USER=alpha;HOST=beta"
 dokku memcached:create lolipop
 
