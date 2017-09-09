@@ -21,7 +21,9 @@ memcached:backup <name> <bucket> (--use-iam) NOT IMPLEMENTED
 memcached:backup-auth <name> <aws_access_key_id> <aws_secret_access_key> (<aws_default_region>) (<aws_signature_version>) (<endpoint_url>) NOT IMPLEMENTED
 memcached:backup-deauth <name>     NOT IMPLEMENTED
 memcached:backup-schedule <name> <schedule> <bucket> NOT IMPLEMENTED
+memcached:backup-set-encryption <name> <encryption_key>, NOT IMPLEMENTED
 memcached:backup-unschedule <name> NOT IMPLEMENTED
+memcached:backup-unset-encryption <name>, NOT IMPLEMENTED
 memcached:clone <name> <new-name>  NOT IMPLEMENTED
 memcached:connect <name>           Connect via telnet to a memcached service
 memcached:create <name>            Create a memcached service with environment variables
