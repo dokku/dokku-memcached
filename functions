@@ -54,6 +54,7 @@ service_create() {
 service_create_container() {
   local SERVICE="$1"
   local SERVICE_ROOT="$PLUGIN_DATA_ROOT/$SERVICE"
+  local SERVICE_HOST_ROOT="$PLUGIN_DATA_HOST_ROOT/$SERVICE"
   local SERVICE_NAME="$(get_service_name "$SERVICE")"
   local SERVICE_MEMORY="64"
 
@@ -80,6 +81,8 @@ service_export() {
 service_import() {
   local SERVICE="$1"
   local SERVICE_ROOT="$PLUGIN_DATA_ROOT/$SERVICE"
+  local SERVICE_HOST_ROOT="$PLUGIN_DATA_HOST_ROOT/$SERVICE"
+  local SERVICE_NAME="$(get_service_name "$SERVICE")"
 
   dokku_log_fail "Not yet implemented"
 }
