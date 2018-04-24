@@ -4,6 +4,7 @@ export MEMCACHED_IMAGE_VERSION=${MEMCACHED_IMAGE_VERSION:="1.4.31"}
 export MEMCACHED_ROOT=${MEMCACHED_ROOT:="/var/lib/dokku/services/memcached"}
 export MEMCACHED_HOST_ROOT=${MEMCACHED_HOST_ROOT:=$MEMCACHED_ROOT}
 
+export PLUGIN_UNIMPLEMENTED_SUBCOMMANDS=("backup" "backup-auth" "backup-deauth" "backup-schedule" "backup-schedule-cat" "backup-set-encryption" "backup-unschedule" "backup-unset-encryption" "clone" "export" "import")
 export PLUGIN_COMMAND_PREFIX="memcached"
 export PLUGIN_CONFIG_ROOT=${PLUGIN_CONFIG_ROOT:="$DOKKU_LIB_ROOT/config/$PLUGIN_COMMAND_PREFIX"}
 export PLUGIN_DATA_ROOT=$MEMCACHED_ROOT
