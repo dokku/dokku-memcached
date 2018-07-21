@@ -17,6 +17,7 @@ sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ## commands
 
 ```
+memcached:app-links <app>          List all memcached service links for a given app
 memcached:backup <name> <bucket> (--use-iam) NOT IMPLEMENTED
 memcached:backup-auth <name> <aws_access_key_id> <aws_secret_access_key> (<aws_default_region>) (<aws_signature_version>) (<endpoint_url>) NOT IMPLEMENTED
 memcached:backup-deauth <name>     NOT IMPLEMENTED
