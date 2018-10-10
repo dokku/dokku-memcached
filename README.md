@@ -46,6 +46,7 @@ memcached:start <name>             Start a previously stopped memcached service
 memcached:stop <name>              Stop a running memcached service
 memcached:unexpose <name>          Unexpose a previously exposed memcached service
 memcached:unlink <name> <app>      Unlink the memcached service from the app
+memcached:upgrade <name>           Upgrade service <service> to the specified version
 ```
 
 ## usage
