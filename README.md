@@ -23,7 +23,7 @@ memcached:backup-auth <name> <aws_access_key_id> <aws_secret_access_key> (<aws_d
 memcached:backup-deauth <name>     NOT IMPLEMENTED
 memcached:backup-schedule <name> <schedule> <bucket> NOT IMPLEMENTED
 memcached:backup-schedule-cat <name> NOT IMPLEMENTED
-memcached:backup-set-encryption <name> <encryption_key> NOT IMPLEMENTED
+memcached:backup-set-encryption <name> <passphrase> NOT IMPLEMENTED
 memcached:backup-unschedule <name> NOT IMPLEMENTED
 memcached:backup-unset-encryption <name> NOT IMPLEMENTED
 memcached:clone <name> <new-name>  NOT IMPLEMENTED
