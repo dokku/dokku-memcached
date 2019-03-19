@@ -61,21 +61,23 @@ unit-tests:
 	@cd tests && echo "executing tests: $(shell cd tests ; ls *.bats | xargs)"
 	cd tests && bats --formatter bats-format-junit -e -T -o ../test-results/bats *.bats
 
-bin/xunit-to-github:
-	mkdir -p bin
-	curl -o bin/xunit-to-github.tgz -sL https://github.com/josegonzalez/go-xunit-to-github/releases/download/v0.2.0/xunit-to-github_0.2.0_$(SYSTEM_NAME)_$(HARDWARE).tgz
-	tar xf bin/xunit-to-github.tgz -C bin
-	chmod +x bin/xunit-to-github
+tmp/xunit-to-github:
+	mkdir -p tmp
+	curl -o tmp/xunit-to-github.tgz -sL https://github.com/josegonzalez/go-xunit-to-github/releases/download/v0.2.0/xunit-to-github_0.2.0_$(SYSTEM_NAME)_$(HARDWARE).tgz
+	tar xf tmp/xunit-to-github.tgz -C tmp
+	chmod +x tmp/xunit-to-github
 
-setup: bin/xunit-to-github
+setup:
 	bash tests/setup.sh
 	$(MAKE) ci-dependencies
 
 test: lint unit-tests
+
+report: tmp/xunit-to-github
 ifdef TRAVIS_REPO_SLUG
 ifdef GITHUB_ACCESS_TOKEN
 ifneq ($(TRAVIS_PULL_REQUEST),false)
-	bin/xunit-to-github --skip-ok --repository-slug $(TRAVIS_REPO_SLUG) --pull-request-id $(TRAVIS_PULL_REQUEST) test-results/bats test-results/shellcheck
+	tmp/xunit-to-github --skip-ok --repository-slug $(TRAVIS_REPO_SLUG) --pull-request-id $(TRAVIS_PULL_REQUEST) test-results/bats test-results/shellcheck
 endif
 endif
 endif
