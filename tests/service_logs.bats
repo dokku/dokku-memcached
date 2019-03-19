@@ -23,6 +23,7 @@ teardown() {
   run dokku --trace "$PLUGIN_COMMAND_PREFIX:logs" l
   echo "output: $output"
   echo "status: $status"
+  echo "docker logs --tail 100 'dokku.memcached.l': $(docker logs --tail 100 "dokku.memcached.l")"
   assert_success
 }
 
