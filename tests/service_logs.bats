@@ -21,6 +21,8 @@ teardown() {
 
 @test "($PLUGIN_COMMAND_PREFIX:logs) success when not tailing" {
   run dokku --trace "$PLUGIN_COMMAND_PREFIX:logs" l
+  echo "output: $output"
+  echo "status: $status"
   assert_success
 }
 
