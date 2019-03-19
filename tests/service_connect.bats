@@ -2,11 +2,11 @@
 load test_helper
 
 setup() {
-  dokku "$PLUGIN_COMMAND_PREFIX:create" l >&2
+  dokku "$PLUGIN_COMMAND_PREFIX:create" l
 }
 
 teardown() {
-  dokku --force "$PLUGIN_COMMAND_PREFIX:destroy" l >&2
+  dokku --force "$PLUGIN_COMMAND_PREFIX:destroy" l
 }
 
 @test "($PLUGIN_COMMAND_PREFIX:connect) error when there are no arguments" {
@@ -20,7 +20,7 @@ teardown() {
 }
 
 @test "($PLUGIN_COMMAND_PREFIX:connect) success" {
+  skip "Connect hangs indefinitely without input"
   run dokku "$PLUGIN_COMMAND_PREFIX:connect" l
-  assert_output 'telnet 172.17.0.34 11211'
+  assert_success
 }
-
