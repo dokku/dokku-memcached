@@ -77,7 +77,7 @@ report: tmp/xunit-to-github
 ifdef TRAVIS_REPO_SLUG
 ifdef GITHUB_ACCESS_TOKEN
 ifneq ($(TRAVIS_PULL_REQUEST),false)
-	tmp/xunit-to-github --skip-ok --job-url $(TRAVIS_JOB_WEB_URL) --pull-request-id $(TRAVIS_PULL_REQUEST) --repository-slug $(TRAVIS_REPO_SLUG) --title "DOKKU_VERSION=$(DOKKU_VERSION)" test-results/bats test-results/shellcheck
+	tmp/xunit-to-github --skip-ok --job-url "$(TRAVIS_JOB_WEB_URL)" --pull-request-id "$(TRAVIS_PULL_REQUEST)" --repository-slug "$(TRAVIS_REPO_SLUG)" --title "DOKKU_VERSION=$(DOKKU_VERSION)" test-results/bats test-results/shellcheck
 endif
 endif
 endif
