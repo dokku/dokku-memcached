@@ -63,7 +63,7 @@ unit-tests:
 
 tmp/xunit-to-github:
 	mkdir -p tmp
-	curl -o tmp/xunit-to-github.tgz -sL https://github.com/josegonzalez/go-xunit-to-github/releases/download/v0.2.0/xunit-to-github_0.2.0_$(SYSTEM_NAME)_$(HARDWARE).tgz
+	curl -o tmp/xunit-to-github.tgz -sL https://github.com/josegonzalez/go-xunit-to-github/releases/download/v0.3.0/xunit-to-github_0.3.0_$(SYSTEM_NAME)_$(HARDWARE).tgz
 	tar xf tmp/xunit-to-github.tgz -C tmp
 	chmod +x tmp/xunit-to-github
 
@@ -77,7 +77,7 @@ report: tmp/xunit-to-github
 ifdef TRAVIS_REPO_SLUG
 ifdef GITHUB_ACCESS_TOKEN
 ifneq ($(TRAVIS_PULL_REQUEST),false)
-	tmp/xunit-to-github --skip-ok --repository-slug $(TRAVIS_REPO_SLUG) --pull-request-id $(TRAVIS_PULL_REQUEST) test-results/bats test-results/shellcheck
+	tmp/xunit-to-github --skip-ok --job-url $(TRAVIS_JOB_WEB_URL) --pull-request-id $(TRAVIS_PULL_REQUEST) --repository-slug $(TRAVIS_REPO_SLUG) --title "DOKKU_VERSION=$(DOKKU_VERSION)" test-results/bats test-results/shellcheck
 endif
 endif
 endif
