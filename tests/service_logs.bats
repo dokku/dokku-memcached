@@ -20,7 +20,7 @@ teardown() {
 }
 
 @test "($PLUGIN_COMMAND_PREFIX:logs) success when not tailing" {
-  run dokku "$PLUGIN_COMMAND_PREFIX:logs" l
+  run dokku --trace "$PLUGIN_COMMAND_PREFIX:logs" l
   assert_success
 }
 
