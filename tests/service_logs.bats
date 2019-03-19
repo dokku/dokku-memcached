@@ -11,17 +11,23 @@ teardown() {
 
 @test "($PLUGIN_COMMAND_PREFIX:logs) error when there are no arguments" {
   run dokku "$PLUGIN_COMMAND_PREFIX:logs"
+  echo "output: $output"
+  echo "status: $status"
   assert_contains "${lines[*]}" "Please specify a valid name for the service"
+  assert_failure
 }
 
 @test "($PLUGIN_COMMAND_PREFIX:logs) error when service does not exist" {
   run dokku "$PLUGIN_COMMAND_PREFIX:logs" not_existing_service
+  echo "output: $output"
+  echo "status: $status"
   assert_contains "${lines[*]}" "service not_existing_service does not exist"
+  assert_failure
 }
 
 @test "($PLUGIN_COMMAND_PREFIX:logs) success when not tailing" {
   skip "This may fail if there is no log output"
-  run dokku --trace "$PLUGIN_COMMAND_PREFIX:logs" l
+  run dokku "$PLUGIN_COMMAND_PREFIX:logs" l
   echo "output: $output"
   echo "status: $status"
   assert_success
