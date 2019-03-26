@@ -10,7 +10,7 @@ Official memcached plugin for dokku. Currently defaults to installing [memcached
 ## installation
 
 ```shell
-# on 0.4.x+
+# on 0.12.x+
 sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ```
 
