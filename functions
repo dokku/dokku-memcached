@@ -55,6 +55,8 @@ service_create() {
   else
     echo "64" >"$SERVICE_ROOT/SERVICE_MEMORY"
   fi
+
+  write_database_name "$SERVICE"
   service_create_container "$SERVICE"
 }
 
