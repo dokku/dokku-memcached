@@ -10,6 +10,7 @@ service-upgrade-cmd() {
   #E you can upgrade an existing service to a new image or image-version
   #E dokku $PLUGIN_COMMAND_PREFIX:upgrade lolipop
   #A service, service to run command against
+  #F -m|--memory MEMORY, override the cache size (in MB, default to 64MB)
   #F -C|--custom-env "USER=alpha;HOST=beta", semi-colon delimited environment variables to start the service with
   #F -i|--image IMAGE, the image name to start the service with
   #F -I|--image-version IMAGE_VERSION, the image version to start the service with
