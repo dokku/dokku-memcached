@@ -55,6 +55,9 @@ memcached:upgrade <name>           Upgrade service <service> to the specified ve
 # create a memcached service named lolipop
 dokku memcached:create lolipop
 
+# you can specify a custom cache size (in MB, default to 64MB)
+dokku memcached:create lolipop --memory 512
+
 # you can also specify the image and image
 # version to use for the service
 # it *must* be compatible with the
