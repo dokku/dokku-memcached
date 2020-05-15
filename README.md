@@ -67,15 +67,15 @@ Create a memcached service named lolipop:
 dokku memcached:create lolipop
 ```
 
-You can also specify the image and image version to use for the service. It *must* be compatible with the ${plugin_image} image.
+You can also specify the image and image version to use for the service. It *must* be compatible with the memcached image. 
 
 ```shell
-export MEMCACHED_IMAGE="${PLUGIN_IMAGE}"
+export MEMCACHED_IMAGE="memcached"
 export MEMCACHED_IMAGE_VERSION="${PLUGIN_IMAGE_VERSION}"
 dokku memcached:create lolipop
 ```
 
-You can also specify custom environment variables to start the memcached service in semi-colon separated form.
+You can also specify custom environment variables to start the memcached service in semi-colon separated form. 
 
 ```shell
 export MEMCACHED_CUSTOM_ENV="USER=alpha;HOST=beta"
@@ -171,7 +171,7 @@ flags:
 - `-a|--alias "BLUE_DATABASE"`: an alternative alias to use for linking to an app via environment variable
 - `-q|--querystring "pool=5"`: ampersand delimited querystring arguments to append to the service link
 
-A memcached service can be linked to a container. This will use native docker links via the docker-options plugin. Here we link it to our 'playground' app.
+A memcached service can be linked to a container. This will use native docker links via the docker-options plugin. Here we link it to our 'playground' app. 
 
 > NOTE: this will restart your app
 
@@ -202,14 +202,14 @@ The host exposed here only works internally in docker containers. If you want yo
 dokku memcached:link other_service playground
 ```
 
-It is possible to change the protocol for memcached_url by setting the environment variable memcached_database_scheme on the app. Doing so will after linking will cause the plugin to think the service is not linked, and we advise you to unlink before proceeding.
+It is possible to change the protocol for `MEMCACHED_URL` by setting the environment variable `MEMCACHED_DATABASE_SCHEME` on the app. Doing so will after linking will cause the plugin to think the service is not linked, and we advise you to unlink before proceeding. 
 
 ```shell
 dokku config:set playground MEMCACHED_DATABASE_SCHEME=memcached2
 dokku memcached:link lolipop playground
 ```
 
-This will cause memcached_url to be set as:
+This will cause `MEMCACHED_URL` to be set as:
 
 ```
 memcached2://lolipop:SOME_PASSWORD@dokku-memcached-lolipop:11211/lolipop
@@ -254,13 +254,13 @@ dokku memcached:connect lolipop
 dokku memcached:enter <service>
 ```
 
-A bash prompt can be opened against a running service. Filesystem changes will not be saved to disk.
+A bash prompt can be opened against a running service. Filesystem changes will not be saved to disk. 
 
 ```shell
 dokku memcached:enter lolipop
 ```
 
-You may also run a command directly against the service. Filesystem changes will not be saved to disk.
+You may also run a command directly against the service. Filesystem changes will not be saved to disk. 
 
 ```shell
 dokku memcached:enter lolipop touch /tmp/test
@@ -273,10 +273,10 @@ dokku memcached:enter lolipop touch /tmp/test
 dokku memcached:expose <service> <ports...>
 ```
 
-Expose the service on the service's normal ports, allowing access to it from the public interface (0. 0. 0. 0):
+Expose the service on the service's normal ports, allowing access to it from the public interface (`0.0.0.0`):
 
 ```shell
-dokku memcached:expose lolipop ${PLUGIN_DATASTORE_PORTS[@]}
+dokku memcached:expose lolipop 11211
 ```
 
 ### unexpose a previously exposed memcached service
@@ -286,7 +286,7 @@ dokku memcached:expose lolipop ${PLUGIN_DATASTORE_PORTS[@]}
 dokku memcached:unexpose <service>
 ```
 
-Unexpose the service, removing access to it from the public interface (0. 0. 0. 0):
+Unexpose the service, removing access to it from the public interface (`0.0.0.0`):
 
 ```shell
 dokku memcached:unexpose lolipop
@@ -313,7 +313,7 @@ You can promote the new service to be the primary one:
 dokku memcached:promote other_service playground
 ```
 
-This will replace memcached_url with the url from other_service and generate another environment variable to hold the previous value if necessary. You could end up with the following for example:
+This will replace `MEMCACHED_URL` with the url from other_service and generate another environment variable to hold the previous value if necessary. You could end up with the following for example:
 
 ```
 MEMCACHED_URL=memcached://other_service:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
@@ -392,7 +392,7 @@ Service scripting can be executed using the following commands:
 dokku memcached:app-links <app>
 ```
 
-List all memcached services that are linked to the 'playground' app.
+List all memcached services that are linked to the 'playground' app. 
 
 ```shell
 dokku memcached:app-links playground
@@ -405,7 +405,7 @@ dokku memcached:app-links playground
 dokku memcached:exists <service>
 ```
 
-Here we check if the lolipop memcached service exists.
+Here we check if the lolipop memcached service exists. 
 
 ```shell
 dokku memcached:exists lolipop
@@ -418,7 +418,7 @@ dokku memcached:exists lolipop
 dokku memcached:linked <service> <app>
 ```
 
-Here we check if the lolipop memcached service is linked to the 'playground' app.
+Here we check if the lolipop memcached service is linked to the 'playground' app. 
 
 ```shell
 dokku memcached:linked lolipop playground
@@ -431,7 +431,7 @@ dokku memcached:linked lolipop playground
 dokku memcached:links <service>
 ```
 
-List all apps linked to the 'lolipop' memcached service.
+List all apps linked to the 'lolipop' memcached service. 
 
 ```shell
 dokku memcached:links lolipop
