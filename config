@@ -21,6 +21,7 @@ export PLUGIN_SCHEME="memcached"
 export PLUGIN_SERVICE="Memcached"
 export PLUGIN_VARIABLE="MEMCACHED"
 export PLUGIN_BASE_PATH="$PLUGIN_PATH"
+export PLUGIN_CONFIG_SUFFIX="config"
 if [[ -n $DOKKU_API_VERSION ]]; then
   export PLUGIN_BASE_PATH="$PLUGIN_ENABLED_PATH"
 fi
