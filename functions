@@ -71,9 +71,14 @@ service_create_container() {
   local SERVICE_MEMORY="64"
 
   [[ -f "$SERVICE_ROOT/SERVICE_MEMORY" ]] && SERVICE_MEMORY="$(cat "$SERVICE_ROOT/SERVICE_MEMORY")"
+  if [[ -n "$SERVICE_MEMORY" ]]; then
+    MEMORY_LIMIT="--memory=${SERVICE_MEMORY}m"
+  fi
+
   [[ -z "$SERVICE_MEMORY" ]] && SERVICE_MEMORY="64"
 
-  ID=$(docker run --name "$SERVICE_NAME" --env-file="$SERVICE_ROOT/ENV" -d --restart always --label dokku=service --label dokku.service=memcached "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" memcached -m "$SERVICE_MEMORY")
+  # shellcheck disable=SC2086
+  ID=$(docker run --name "$SERVICE_NAME" $MEMORY_LIMIT --env-file="$SERVICE_ROOT/ENV" -d --restart always --label dokku=service --label dokku.service=memcached "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" memcached -m "$SERVICE_MEMORY")
   echo "$ID" >"$SERVICE_ROOT/ID"
 
   dokku_log_verbose_quiet "Waiting for container to be ready"
