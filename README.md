@@ -23,7 +23,7 @@ memcached:create <service> [--create-flags...]   # create a memcached service
 memcached:destroy <service> [-f|--force]         # delete the memcached service/data/container if there are no links left
 memcached:enter <service>                        # enter or run a command in a running memcached service container
 memcached:exists <service>                       # check if the memcached service exists
-memcached:expose <service> <ports...>            # expose a memcached service on custom port if provided (random port otherwise)
+memcached:expose <service> <ports...>            # expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
 memcached:info <service> [--single-info-flag]    # print the service information
 memcached:link <service> <app> [--link-flags...] # link the memcached service to the app
 memcached:linked <service> <app>                 # check if the memcached service is linked to an app
@@ -266,7 +266,7 @@ You may also run a command directly against the service. Filesystem changes will
 dokku memcached:enter lolipop touch /tmp/test
 ```
 
-### expose a memcached service on custom port if provided (random port otherwise)
+### expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
 
 ```shell
 # usage
@@ -277,6 +277,12 @@ Expose the service on the service's normal ports, allowing access to it from the
 
 ```shell
 dokku memcached:expose lolipop 11211
+```
+
+Expose the service on the service's normal ports, with the first on a specified ip adddress (127.0.0.1):
+
+```shell
+dokku memcached:expose lolipop 127.0.0.1:11211
 ```
 
 ### unexpose a previously exposed memcached service
