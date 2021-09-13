@@ -76,6 +76,9 @@ service_create_container() {
     SHM_SIZE="--shm-size=${SERVICE_SHM_SIZE}"
   fi
 
+  [[ -f "$SERVICE_ROOT/IMAGE" ]] && PLUGIN_IMAGE="$(cat "$SERVICE_ROOT/IMAGE")"
+  [[ -f "$SERVICE_ROOT/IMAGE_VERSION" ]] && PLUGIN_IMAGE_VERSION="$(cat "$SERVICE_ROOT/IMAGE_VERSION")"
+
   [[ -z "$SERVICE_MEMORY" ]] && SERVICE_MEMORY="64"
 
   # shellcheck disable=SC2086
@@ -131,6 +134,8 @@ service_start() {
     service_create_container "$SERVICE"
   else
     if ! service_image_exists "$SERVICE"; then
+      [[ -f "$SERVICE_ROOT/IMAGE" ]] && PLUGIN_IMAGE="$(cat "$SERVICE_ROOT/IMAGE")"
+      [[ -f "$SERVICE_ROOT/IMAGE_VERSION" ]] && PLUGIN_IMAGE_VERSION="$(cat "$SERVICE_ROOT/IMAGE_VERSION")"
       dokku_log_verbose_quiet "Missing image $PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION for $SERVICE"
     else
       dokku_log_verbose_quiet "Neither container nor valid configuration exists for $SERVICE"
