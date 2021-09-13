@@ -63,10 +63,10 @@ flags:
 - `-r|--root-password PASSWORD`: override the root-level service password
 - `-s|--shm-size SHM_SIZE`: override shared memory size for memcached docker container
 
-Create a memcached service named lolipop:
+Create a memcached service named lollipop:
 
 ```shell
-dokku memcached:create lolipop
+dokku memcached:create lollipop
 ```
 
 You can also specify the image and image version to use for the service. It *must* be compatible with the memcached image.
@@ -74,14 +74,14 @@ You can also specify the image and image version to use for the service. It *mus
 ```shell
 export MEMCACHED_IMAGE="memcached"
 export MEMCACHED_IMAGE_VERSION="${PLUGIN_IMAGE_VERSION}"
-dokku memcached:create lolipop
+dokku memcached:create lollipop
 ```
 
 You can also specify custom environment variables to start the memcached service in semi-colon separated form.
 
 ```shell
 export MEMCACHED_CUSTOM_ENV="USER=alpha;HOST=beta"
-dokku memcached:create lolipop
+dokku memcached:create lollipop
 ```
 
 ### print the service information
@@ -107,22 +107,22 @@ flags:
 Get connection information as follows:
 
 ```shell
-dokku memcached:info lolipop
+dokku memcached:info lollipop
 ```
 
 You can also retrieve a specific piece of service info via flags:
 
 ```shell
-dokku memcached:info lolipop --config-dir
-dokku memcached:info lolipop --data-dir
-dokku memcached:info lolipop --dsn
-dokku memcached:info lolipop --exposed-ports
-dokku memcached:info lolipop --id
-dokku memcached:info lolipop --internal-ip
-dokku memcached:info lolipop --links
-dokku memcached:info lolipop --service-root
-dokku memcached:info lolipop --status
-dokku memcached:info lolipop --version
+dokku memcached:info lollipop --config-dir
+dokku memcached:info lollipop --data-dir
+dokku memcached:info lollipop --dsn
+dokku memcached:info lollipop --exposed-ports
+dokku memcached:info lollipop --id
+dokku memcached:info lollipop --internal-ip
+dokku memcached:info lollipop --links
+dokku memcached:info lollipop --service-root
+dokku memcached:info lollipop --status
+dokku memcached:info lollipop --version
 ```
 
 ### list all memcached services
@@ -152,13 +152,13 @@ flags:
 You can tail logs for a particular service:
 
 ```shell
-dokku memcached:logs lolipop
+dokku memcached:logs lollipop
 ```
 
 By default, logs will not be tailed, but you can do this with the --tail flag:
 
 ```shell
-dokku memcached:logs lolipop --tail
+dokku memcached:logs lollipop --tail
 ```
 
 ### link the memcached service to the app
@@ -178,24 +178,24 @@ A memcached service can be linked to a container. This will use native docker li
 > NOTE: this will restart your app
 
 ```shell
-dokku memcached:link lolipop playground
+dokku memcached:link lollipop playground
 ```
 
 The following environment variables will be set automatically by docker (not on the app itself, so they won’t be listed when calling dokku config):
 
 ```
-DOKKU_MEMCACHED_LOLIPOP_NAME=/lolipop/DATABASE
-DOKKU_MEMCACHED_LOLIPOP_PORT=tcp://172.17.0.1:11211
-DOKKU_MEMCACHED_LOLIPOP_PORT_11211_TCP=tcp://172.17.0.1:11211
-DOKKU_MEMCACHED_LOLIPOP_PORT_11211_TCP_PROTO=tcp
-DOKKU_MEMCACHED_LOLIPOP_PORT_11211_TCP_PORT=11211
-DOKKU_MEMCACHED_LOLIPOP_PORT_11211_TCP_ADDR=172.17.0.1
+DOKKU_MEMCACHED_LOLLIPOP_NAME=/lollipop/DATABASE
+DOKKU_MEMCACHED_LOLLIPOP_PORT=tcp://172.17.0.1:11211
+DOKKU_MEMCACHED_LOLLIPOP_PORT_11211_TCP=tcp://172.17.0.1:11211
+DOKKU_MEMCACHED_LOLLIPOP_PORT_11211_TCP_PROTO=tcp
+DOKKU_MEMCACHED_LOLLIPOP_PORT_11211_TCP_PORT=11211
+DOKKU_MEMCACHED_LOLLIPOP_PORT_11211_TCP_ADDR=172.17.0.1
 ```
 
 The following will be set on the linked application by default:
 
 ```
-MEMCACHED_URL=memcached://dokku-memcached-lolipop:11211
+MEMCACHED_URL=memcached://dokku-memcached-lollipop:11211
 ```
 
 The host exposed here only works internally in docker containers. If you want your container to be reachable from outside, you should use the `expose` subcommand. Another service can be linked to your app:
@@ -208,13 +208,13 @@ It is possible to change the protocol for `MEMCACHED_URL` by setting the environ
 
 ```shell
 dokku config:set playground MEMCACHED_DATABASE_SCHEME=memcached2
-dokku memcached:link lolipop playground
+dokku memcached:link lollipop playground
 ```
 
 This will cause `MEMCACHED_URL` to be set as:
 
 ```
-memcached2://dokku-memcached-lolipop:11211
+memcached2://dokku-memcached-lollipop:11211
 ```
 
 ### unlink the memcached service from the app
@@ -229,7 +229,7 @@ You can unlink a memcached service:
 > NOTE: this will restart your app and unset related environment variables
 
 ```shell
-dokku memcached:unlink lolipop playground
+dokku memcached:unlink lollipop playground
 ```
 
 ### Service Lifecycle
@@ -246,7 +246,7 @@ dokku memcached:connect <service>
 Connect to the service via the memcached connection tool:
 
 ```shell
-dokku memcached:connect lolipop
+dokku memcached:connect lollipop
 ```
 
 ### enter or run a command in a running memcached service container
@@ -259,13 +259,13 @@ dokku memcached:enter <service>
 A bash prompt can be opened against a running service. Filesystem changes will not be saved to disk.
 
 ```shell
-dokku memcached:enter lolipop
+dokku memcached:enter lollipop
 ```
 
 You may also run a command directly against the service. Filesystem changes will not be saved to disk.
 
 ```shell
-dokku memcached:enter lolipop touch /tmp/test
+dokku memcached:enter lollipop touch /tmp/test
 ```
 
 ### expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
@@ -278,13 +278,13 @@ dokku memcached:expose <service> <ports...>
 Expose the service on the service's normal ports, allowing access to it from the public interface (`0.0.0.0`):
 
 ```shell
-dokku memcached:expose lolipop 11211
+dokku memcached:expose lollipop 11211
 ```
 
 Expose the service on the service's normal ports, with the first on a specified ip adddress (127.0.0.1):
 
 ```shell
-dokku memcached:expose lolipop 127.0.0.1:11211
+dokku memcached:expose lollipop 127.0.0.1:11211
 ```
 
 ### unexpose a previously exposed memcached service
@@ -297,7 +297,7 @@ dokku memcached:unexpose <service>
 Unexpose the service, removing access to it from the public interface (`0.0.0.0`):
 
 ```shell
-dokku memcached:unexpose lolipop
+dokku memcached:unexpose lollipop
 ```
 
 ### promote service <service> as MEMCACHED_URL in <app>
@@ -326,7 +326,7 @@ This will replace `MEMCACHED_URL` with the url from other_service and generate a
 ```
 MEMCACHED_URL=memcached://other_service:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
 DOKKU_MEMCACHED_BLUE_URL=memcached://other_service:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
-DOKKU_MEMCACHED_SILVER_URL=memcached://lolipop:SOME_PASSWORD@dokku-memcached-lolipop:11211/lolipop
+DOKKU_MEMCACHED_SILVER_URL=memcached://lollipop:SOME_PASSWORD@dokku-memcached-lollipop:11211/lollipop
 ```
 
 ### start a previously stopped memcached service
@@ -339,7 +339,7 @@ dokku memcached:start <service>
 Start the service:
 
 ```shell
-dokku memcached:start lolipop
+dokku memcached:start lollipop
 ```
 
 ### stop a running memcached service
@@ -352,7 +352,7 @@ dokku memcached:stop <service>
 Stop the service and the running container:
 
 ```shell
-dokku memcached:stop lolipop
+dokku memcached:stop lollipop
 ```
 
 ### graceful shutdown and restart of the memcached service container
@@ -365,7 +365,7 @@ dokku memcached:restart <service>
 Restart the service:
 
 ```shell
-dokku memcached:restart lolipop
+dokku memcached:restart lollipop
 ```
 
 ### upgrade service <service> to the specified versions
@@ -387,7 +387,7 @@ flags:
 You can upgrade an existing service to a new image or image-version:
 
 ```shell
-dokku memcached:upgrade lolipop
+dokku memcached:upgrade lollipop
 ```
 
 ### Service Automation
@@ -414,10 +414,10 @@ dokku memcached:app-links playground
 dokku memcached:exists <service>
 ```
 
-Here we check if the lolipop memcached service exists.
+Here we check if the lollipop memcached service exists.
 
 ```shell
-dokku memcached:exists lolipop
+dokku memcached:exists lollipop
 ```
 
 ### check if the memcached service is linked to an app
@@ -427,10 +427,10 @@ dokku memcached:exists lolipop
 dokku memcached:linked <service> <app>
 ```
 
-Here we check if the lolipop memcached service is linked to the `playground` app.
+Here we check if the lollipop memcached service is linked to the `playground` app.
 
 ```shell
-dokku memcached:linked lolipop playground
+dokku memcached:linked lollipop playground
 ```
 
 ### list all apps linked to the memcached service
@@ -440,10 +440,10 @@ dokku memcached:linked lolipop playground
 dokku memcached:links <service>
 ```
 
-List all apps linked to the `lolipop` memcached service.
+List all apps linked to the `lollipop` memcached service.
 
 ```shell
-dokku memcached:links lolipop
+dokku memcached:links lollipop
 ```
 
 ### Disabling `docker pull` calls
