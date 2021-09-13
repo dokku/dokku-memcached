@@ -194,7 +194,7 @@ DOKKU_MEMCACHED_LOLIPOP_PORT_11211_TCP_ADDR=172.17.0.1
 The following will be set on the linked application by default:
 
 ```
-MEMCACHED_URL=memcached://lolipop:SOME_PASSWORD@dokku-memcached-lolipop:11211/lolipop
+MEMCACHED_URL=memcached://dokku-memcached-lolipop:11211
 ```
 
 The host exposed here only works internally in docker containers. If you want your container to be reachable from outside, you should use the `expose` subcommand. Another service can be linked to your app:
@@ -213,7 +213,7 @@ dokku memcached:link lolipop playground
 This will cause `MEMCACHED_URL` to be set as:
 
 ```
-memcached2://lolipop:SOME_PASSWORD@dokku-memcached-lolipop:11211/lolipop
+memcached2://dokku-memcached-lolipop:11211
 ```
 
 ### unlink the memcached service from the app
