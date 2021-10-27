@@ -17,26 +17,26 @@ sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git memcached
 ## Commands
 
 ```
-memcached:app-links <app>                        # list all memcached service links for a given app
-memcached:connect <service>                      # connect to the service via the memcached connection tool
-memcached:create <service> [--create-flags...]   # create a memcached service
-memcached:destroy <service> [-f|--force]         # delete the memcached service/data/container if there are no links left
-memcached:enter <service>                        # enter or run a command in a running memcached service container
-memcached:exists <service>                       # check if the memcached service exists
-memcached:expose <service> <ports...>            # expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
-memcached:info <service> [--single-info-flag]    # print the service information
-memcached:link <service> <app> [--link-flags...] # link the memcached service to the app
-memcached:linked <service> <app>                 # check if the memcached service is linked to an app
-memcached:links <service>                        # list all apps linked to the memcached service
-memcached:list                                   # list all memcached services
-memcached:logs <service> [-t|--tail]             # print the most recent log(s) for this service
-memcached:promote <service> <app>                # promote service <service> as MEMCACHED_URL in <app>
-memcached:restart <service>                      # graceful shutdown and restart of the memcached service container
-memcached:start <service>                        # start a previously stopped memcached service
-memcached:stop <service>                         # stop a running memcached service
-memcached:unexpose <service>                     # unexpose a previously exposed memcached service
-memcached:unlink <service> <app>                 # unlink the memcached service from the app
-memcached:upgrade <service> [--upgrade-flags...] # upgrade service <service> to the specified versions
+memcached:app-links <app>                          # list all memcached service links for a given app
+memcached:connect <service>                        # connect to the service via the memcached connection tool
+memcached:create <service> [--create-flags...]     # create a memcached service
+memcached:destroy <service> [-f|--force]           # delete the memcached service/data/container if there are no links left
+memcached:enter <service>                          # enter or run a command in a running memcached service container
+memcached:exists <service>                         # check if the memcached service exists
+memcached:expose <service> <ports...>              # expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
+memcached:info <service> [--single-info-flag]      # print the service information
+memcached:link <service> <app> [--link-flags...]   # link the memcached service to the app
+memcached:linked <service> <app>                   # check if the memcached service is linked to an app
+memcached:links <service>                          # list all apps linked to the memcached service
+memcached:list                                     # list all memcached services
+memcached:logs <service> [-t|--tail] <tail-num-optional> # print the most recent log(s) for this service
+memcached:promote <service> <app>                  # promote service <service> as MEMCACHED_URL in <app>
+memcached:restart <service>                        # graceful shutdown and restart of the memcached service container
+memcached:start <service>                          # start a previously stopped memcached service
+memcached:stop <service>                           # stop a running memcached service
+memcached:unexpose <service>                       # unexpose a previously exposed memcached service
+memcached:unlink <service> <app>                   # unlink the memcached service from the app
+memcached:upgrade <service> [--upgrade-flags...]   # upgrade service <service> to the specified versions
 ```
 
 ## Usage
@@ -142,12 +142,12 @@ dokku memcached:list
 
 ```shell
 # usage
-dokku memcached:logs <service> [-t|--tail]
+dokku memcached:logs <service> [-t|--tail] <tail-num-optional>
 ```
 
 flags:
 
-- `-t|--tail`: do not stop when end of the logs are reached and wait for additional output
+- `-t|--tail [<tail-num>]`: do not stop when end of the logs are reached and wait for additional output
 
 You can tail logs for a particular service:
 
@@ -159,6 +159,12 @@ By default, logs will not be tailed, but you can do this with the --tail flag:
 
 ```shell
 dokku memcached:logs lollipop --tail
+```
+
+The default tail setting is to show all logs, but an initial count can also be specified:
+
+```shell
+dokku memcached:logs lollipop --tail 5
 ```
 
 ### link the memcached service to the app
