@@ -30,6 +30,7 @@ memcached:linked <service> <app>                   # check if the memcached serv
 memcached:links <service>                          # list all apps linked to the memcached service
 memcached:list                                     # list all memcached services
 memcached:logs <service> [-t|--tail] <tail-num-optional> # print the most recent log(s) for this service
+memcached:pause <service>                          # pause a running memcached service
 memcached:promote <service> <app>                  # promote service <service> as MEMCACHED_URL in <app>
 memcached:restart <service>                        # graceful shutdown and restart of the memcached service container
 memcached:start <service>                          # start a previously stopped memcached service
@@ -359,10 +360,23 @@ dokku memcached:start lollipop
 dokku memcached:stop <service>
 ```
 
-Stop the service and the running container:
+Stop the service and removes the running container:
 
 ```shell
 dokku memcached:stop lollipop
+```
+
+### pause a running memcached service
+
+```shell
+# usage
+dokku memcached:pause <service>
+```
+
+Pause the running container for the service:
+
+```shell
+dokku memcached:pause lollipop
 ```
 
 ### graceful shutdown and restart of the memcached service container
