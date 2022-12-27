@@ -3,7 +3,8 @@ _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export MEMCACHED_IMAGE=${MEMCACHED_IMAGE:="$(awk -F '[ :]' '{print $2}' "${_DIR}/Dockerfile")"}
 export MEMCACHED_IMAGE_VERSION=${MEMCACHED_IMAGE_VERSION:="$(awk -F '[ :]' '{print $3}' "${_DIR}/Dockerfile")"}
 export MEMCACHED_ROOT=${MEMCACHED_ROOT:="$DOKKU_LIB_ROOT/services/memcached"}
-export MEMCACHED_HOST_ROOT=${MEMCACHED_HOST_ROOT:=$MEMCACHED_ROOT}
+export DOKKU_LIB_HOST_ROOT=${DOKKU_LIB_HOST_ROOT:=$DOKKU_LIB_ROOT}
+export MEMCACHED_HOST_ROOT=${MEMCACHED_HOST_ROOT:="$DOKKU_LIB_HOST_ROOT/services/memcached"}
 
 export PLUGIN_UNIMPLEMENTED_SUBCOMMANDS=("backup" "backup-auth" "backup-deauth" "backup-schedule" "backup-schedule-cat" "backup-set-encryption" "backup-unschedule" "backup-unset-encryption" "clone" "export" "import")
 export PLUGIN_COMMAND_PREFIX="memcached"
