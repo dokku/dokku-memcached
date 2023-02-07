@@ -33,6 +33,7 @@ memcached:logs <service> [-t|--tail] <tail-num-optional> # print the most recent
 memcached:pause <service>                          # pause a running memcached service
 memcached:promote <service> <app>                  # promote service <service> as MEMCACHED_URL in <app>
 memcached:restart <service>                        # graceful shutdown and restart of the memcached service container
+memcached:set <service> <key> <value>              # set or clear a property for a service
 memcached:start <service>                          # start a previously stopped memcached service
 memcached:stop <service>                           # stop a running memcached service
 memcached:unexpose <service>                       # unexpose a previously exposed memcached service
@@ -237,6 +238,25 @@ You can unlink a memcached service:
 
 ```shell
 dokku memcached:unlink lollipop playground
+```
+
+### set or clear a property for a service
+
+```shell
+# usage
+dokku memcached:set <service> <key> <value>
+```
+
+Set the network to attach after the service container is started:
+
+```shell
+dokku memcached:set lollipop post-create-network custom-network
+```
+
+Unset the post-create-network value:
+
+```shell
+dokku memcached:set lollipop post-create-network
 ```
 
 ### Service Lifecycle
