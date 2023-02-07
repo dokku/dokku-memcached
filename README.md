@@ -101,7 +101,10 @@ flags:
 - `--exposed-ports`: show service exposed ports
 - `--id`: show the service container id
 - `--internal-ip`: show the service internal ip
+- `--initial-network`: show the initial network being connected to
 - `--links`: show the service app links
+- `--post-create-network`: show the networks to attach to after service container creation
+- `--post-start-network`: show the networks to attach to after service container start
 - `--service-root`: show the service root directory
 - `--status`: show the service running status
 - `--version`: show the service image version
@@ -121,7 +124,10 @@ dokku memcached:info lollipop --dsn
 dokku memcached:info lollipop --exposed-ports
 dokku memcached:info lollipop --id
 dokku memcached:info lollipop --internal-ip
+dokku memcached:info lollipop --initial-network
 dokku memcached:info lollipop --links
+dokku memcached:info lollipop --post-create-network
+dokku memcached:info lollipop --post-start-network
 dokku memcached:info lollipop --service-root
 dokku memcached:info lollipop --status
 dokku memcached:info lollipop --version
