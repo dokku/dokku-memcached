@@ -1,6 +1,6 @@
 # dokku memcached [![Build Status](https://img.shields.io/github/actions/workflow/status/dokku/dokku-memcached/ci.yml?branch=master&style=flat-square "Build Status")](https://github.com/dokku/dokku-memcached/actions/workflows/ci.yml?query=branch%3Amaster) [![IRC Network](https://img.shields.io/badge/irc-libera-blue.svg?style=flat-square "IRC Libera")](https://webchat.libera.chat/?channels=dokku)
 
-Official memcached plugin for dokku. Currently defaults to installing [memcached 1.6.21](https://hub.docker.com/_/memcached/).
+Official memcached plugin for dokku. Currently defaults to installing [memcached 1.6.22](https://hub.docker.com/_/memcached/).
 
 ## Requirements
 
@@ -74,7 +74,7 @@ Create a memcached service named lollipop:
 dokku memcached:create lollipop
 ```
 
-You can also specify the image and image version to use for the service. It _must_ be compatible with the memcached image.
+You can also specify the image and image version to use for the service. It *must* be compatible with the memcached image.
 
 ```shell
 export MEMCACHED_IMAGE="memcached"
