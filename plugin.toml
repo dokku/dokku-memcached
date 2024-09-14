@@ -1,4 +1,4 @@
 [plugin]
 description = "dokku memcached service plugin"
-version = "1.35.9"
+version = "1.35.10"
 [plugin.config]
