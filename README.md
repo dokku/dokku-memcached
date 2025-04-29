@@ -334,7 +334,7 @@ Expose the service on the service's normal ports, allowing access to it from the
 dokku memcached:expose lollipop 11211
 ```
 
-Expose the service on the service's normal ports, with the first on a specified ip adddress (127.0.0.1):
+Expose the service on the service's normal ports, with the first on a specified ip address (127.0.0.1):
 
 ```shell
 dokku memcached:expose lollipop 127.0.0.1:11211
@@ -514,6 +514,7 @@ List all apps linked to the `lollipop` memcached service.
 ```shell
 dokku memcached:links lollipop
 ```
+
 ### Backups
 
 Datastore backups are supported via AWS S3 and S3 compatible services like [minio](https://github.com/minio/minio).
