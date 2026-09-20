@@ -1,45 +1,43 @@
 # dokku memcached [![Build Status](https://img.shields.io/github/actions/workflow/status/dokku/dokku-memcached/ci.yml?branch=master&style=flat-square "Build Status")](https://github.com/dokku/dokku-memcached/actions/workflows/ci.yml?query=branch%3Amaster) [![IRC Network](https://img.shields.io/badge/irc-libera-blue.svg?style=flat-square "IRC Libera")](https://webchat.libera.chat/?channels=dokku)
 
-Official memcached plugin for dokku. Currently defaults to installing [memcached 1.6.42](https://hub.docker.com/_/memcached/).
+Official memcached plugin for dokku. Currently defaults to installing [memcached 1.6.45](https://hub.docker.com/_/memcached/).
 
 ## Requirements
 
-- dokku 0.19.x+
+- dokku 0.35.x+
 - docker 1.8.x
 
 ## Installation
 
 ```shell
-# on 0.19.x+
+# on 0.35.x+
 sudo dokku plugin:install https://github.com/dokku/dokku-memcached.git --name memcached
 ```
 
 ## Commands
 
 ```
-memcached:app-links <app>                          # list all memcached service links for a given app
-memcached:backup-set-public-key-encryption <service> <public-key-id> # set GPG Public Key encryption for all future backups of memcached service
-memcached:backup-unset-public-key-encryption <service> # unset GPG Public Key encryption for future backups of the memcached service
+memcached:app-links [<app>]                        # list all Memcached service links for a given app
 memcached:connect <service>                        # connect to the service via the memcached connection tool
-memcached:create <service> [--create-flags...]     # create a memcached service
-memcached:destroy <service> [-f|--force]           # delete the memcached service/data/container if there are no links left
-memcached:enter <service>                          # enter or run a command in a running memcached service container
-memcached:exists <service>                         # check if the memcached service exists
-memcached:expose <service> <ports...>              # expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
-memcached:info <service> [--single-info-flag]      # print the service information
-memcached:link <service> <app> [--link-flags...]   # link the memcached service to the app
-memcached:linked <service> <app>                   # check if the memcached service is linked to an app
-memcached:links <service>                          # list all apps linked to the memcached service
-memcached:list                                     # list all memcached services
-memcached:logs <service> [-t|--tail] <tail-num-optional> # print the most recent log(s) for this service
-memcached:pause <service>                          # pause a running memcached service
-memcached:promote <service> <app>                  # promote service <service> as MEMCACHED_URL in <app>
-memcached:restart <service>                        # graceful shutdown and restart of the memcached service container
+memcached:create <service> [--create-flags...]     # create a Memcached service
+memcached:destroy <service> [-f|--force]           # delete the Memcached service/data/container if there are no links left
+memcached:enter <service>                          # enter or run a command in a running Memcached service container
+memcached:exists <service>                         # check if the Memcached service exists
+memcached:expose <service> <ports...>              # expose a Memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
+memcached:info <service> [--info-flags...]         # print the service information
+memcached:link <service> [<app>] [--link-flags...] # link the Memcached service to the app
+memcached:linked <service> [<app>]                 # check if the Memcached service is linked to an app
+memcached:links <service>                          # list all apps linked to the Memcached service
+memcached:list                                     # list all Memcached services
+memcached:logs <service> [-t|--tail [<tail-num>]]  # print the most recent log(s) for this service
+memcached:pause <service>                          # pause a running Memcached service
+memcached:promote <service> [<app>]                # promote service <service> as MEMCACHED_URL in <app>
+memcached:restart <service>                        # graceful shutdown and restart of the Memcached service container
 memcached:set <service> <key> <value>              # set or clear a property for a service
-memcached:start <service>                          # start a previously stopped memcached service
-memcached:stop <service>                           # stop a running memcached service
-memcached:unexpose <service>                       # unexpose a previously exposed memcached service
-memcached:unlink <service> <app>                   # unlink the memcached service from the app
+memcached:start <service>                          # start a previously stopped Memcached service
+memcached:stop <service>                           # stop a running Memcached service
+memcached:unexpose <service>                       # unexpose a previously exposed Memcached service
+memcached:unlink <service> [<app>] [-n|--no-restart] # unlink the Memcached service from the app
 memcached:upgrade <service> [--upgrade-flags...]   # upgrade service <service> to the specified versions
 ```
 
@@ -49,7 +47,7 @@ Help for any commands can be displayed by specifying the command as an argument 
 
 ### Basic Usage
 
-### create a memcached service
+### create a Memcached service
 
 ```shell
 # usage
@@ -58,17 +56,17 @@ dokku memcached:create <service> [--create-flags...]
 
 flags:
 
-- `-c|--config-options "--args --go=here"`: extra arguments to pass to the container create command (default: `None`)
-- `-C|--custom-env "USER=alpha;HOST=beta"`: semi-colon delimited environment variables to start the service with
-- `-i|--image IMAGE`: the image name to start the service with
-- `-I|--image-version IMAGE_VERSION`: the image version to start the service with
-- `-m|--memory MEMORY`: container memory limit in megabytes (default: unlimited)
-- `-N|--initial-network INITIAL_NETWORK`: the initial network to attach the service to
-- `-p|--password PASSWORD`: override the user-level service password
-- `-P|--post-create-network NETWORKS`: a comma-separated list of networks to attach the service container to after service creation
-- `-r|--root-password PASSWORD`: override the root-level service password
-- `-S|--post-start-network NETWORKS`: a comma-separated list of networks to attach the service container to after service start
-- `-s|--shm-size SHM_SIZE`: override shared memory size for memcached docker container
+- `-c|--config-options <string>`: extra arguments to pass to the container create command
+- `-C|--custom-env <string>`: semi-colon delimited environment variables to start the service with
+- `-i|--image <string>`: the image name to start the service with
+- `-I|--image-version <string>`: the image version to start the service with
+- `-N|--initial-network <string>`: the initial network to attach the service to
+- `-m|--memory <int>`: container memory limit in megabytes (default: unlimited)
+- `-p|--password <string>`: override the user-level service password
+- `-P|--post-create-network <strings>`: a comma-separated list of networks to attach the service container to after service creation
+- `-S|--post-start-network <strings>`: a comma-separated list of networks to attach the service container to after service start
+- `-r|--root-password <string>`: override the root-level service password
+- `-s|--shm-size <string>`: override shared memory size for the service docker container
 
 Create a memcached service named lollipop:
 
@@ -80,7 +78,7 @@ You can also specify the image and image version to use for the service. It *mus
 
 ```shell
 export MEMCACHED_IMAGE="memcached"
-export MEMCACHED_IMAGE_VERSION="${PLUGIN_IMAGE_VERSION}"
+export MEMCACHED_IMAGE_VERSION="1.6.45"
 dokku memcached:create lollipop
 ```
 
@@ -91,11 +89,28 @@ export MEMCACHED_CUSTOM_ENV="USER=alpha;HOST=beta"
 dokku memcached:create lollipop
 ```
 
+### delete the Memcached service/data/container if there are no links left
+
+```shell
+# usage
+dokku memcached:destroy <service> [-f|--force]
+```
+
+flags:
+
+- `-f|--force`: force the destruction of the service
+
+Destroy the service, it's data, and the running container:
+
+```shell
+dokku memcached:destroy lollipop
+```
+
 ### print the service information
 
 ```shell
 # usage
-dokku memcached:info <service> [--single-info-flag]
+dokku memcached:info <service> [--info-flags...]
 ```
 
 flags:
@@ -105,8 +120,8 @@ flags:
 - `--dsn`: show the service DSN
 - `--exposed-ports`: show service exposed ports
 - `--id`: show the service container id
-- `--internal-ip`: show the service internal ip
 - `--initial-network`: show the initial network being connected to
+- `--internal-ip`: show the service internal ip
 - `--links`: show the service app links
 - `--post-create-network`: show the networks to attach to after service container creation
 - `--post-start-network`: show the networks to attach to after service container start
@@ -138,7 +153,7 @@ dokku memcached:info lollipop --status
 dokku memcached:info lollipop --version
 ```
 
-### list all memcached services
+### list all Memcached services
 
 ```shell
 # usage
@@ -155,12 +170,12 @@ dokku memcached:list
 
 ```shell
 # usage
-dokku memcached:logs <service> [-t|--tail] <tail-num-optional>
+dokku memcached:logs <service> [-t|--tail [<tail-num>]]
 ```
 
 flags:
 
-- `-t|--tail [<tail-num>]`: do not stop when end of the logs are reached and wait for additional output
+- `-t|--tail <int>`: tail the logs, optionally showing this many lines
 
 You can tail logs for a particular service:
 
@@ -174,24 +189,24 @@ By default, logs will not be tailed, but you can do this with the --tail flag:
 dokku memcached:logs lollipop --tail
 ```
 
-The default tail setting is to show all logs, but an initial count can also be specified:
+By default the last 100 lines are shown, but a different count can be specified:
 
 ```shell
-dokku memcached:logs lollipop --tail 5
+dokku memcached:logs lollipop --tail=5
 ```
 
-### link the memcached service to the app
+### link the Memcached service to the app
 
 ```shell
 # usage
-dokku memcached:link <service> <app> [--link-flags...]
+dokku memcached:link <service> [<app>] [--link-flags...]
 ```
 
 flags:
 
-- `-a|--alias "BLUE_DATABASE"`: an alternative alias to use for linking to an app via environment variable
-- `-q|--querystring "pool=5"`: ampersand delimited querystring arguments to append to the service link
-- `-n|--no-restart "false"`: whether or not to restart the app on link (default: true)
+- `-a|--alias <string>`: an alternative alias to use for the config url exported to the app
+- `-n|--no-restart`: whether to skip restarting the app
+- `-q|--querystring <string>`: ampersand delimited querystring arguments to append to the service url
 
 A memcached service can be linked to a container. This will use native docker links via the docker-options plugin. Here we link it to our `playground` app.
 
@@ -215,7 +230,7 @@ DOKKU_MEMCACHED_LOLLIPOP_PORT_11211_TCP_ADDR=172.17.0.1
 The following will be set on the linked application by default:
 
 ```
-MEMCACHED_URL=memcached://dokku-memcached-lollipop:11211
+MEMCACHED_URL=memcached://:SOME_PASSWORD@dokku-memcached-lollipop:11211
 ```
 
 The host exposed here only works internally in docker containers. If you want your container to be reachable from outside, you should use the `expose` subcommand. Another service can be linked to your app:
@@ -234,19 +249,19 @@ dokku memcached:link lollipop playground
 This will cause `MEMCACHED_URL` to be set as:
 
 ```
-memcached2://dokku-memcached-lollipop:11211
+memcached2://:SOME_PASSWORD@dokku-memcached-lollipop:11211
 ```
 
-### unlink the memcached service from the app
+### unlink the Memcached service from the app
 
 ```shell
 # usage
-dokku memcached:unlink <service> <app>
+dokku memcached:unlink <service> [<app>] [-n|--no-restart]
 ```
 
 flags:
 
-- `-n|--no-restart "false"`: whether or not to restart the app on unlink (default: true)
+- `-n|--no-restart`: whether to skip restarting the app
 
 You can unlink a memcached service:
 
@@ -281,6 +296,12 @@ Unset the post-create-network value:
 dokku memcached:set lollipop post-create-network
 ```
 
+Set the keyserver a public key for backup encryption is fetched from:
+
+```shell
+dokku memcached:set lollipop backup-keyserver hkp://keys.example.com
+```
+
 ### Service Lifecycle
 
 The lifecycle of each service can be managed through the following commands:
@@ -300,7 +321,7 @@ Connect to the service via the memcached connection tool:
 dokku memcached:connect lollipop
 ```
 
-### enter or run a command in a running memcached service container
+### enter or run a command in a running Memcached service container
 
 ```shell
 # usage
@@ -321,7 +342,7 @@ You may also run a command directly against the service. Filesystem changes will
 dokku memcached:enter lollipop touch /tmp/test
 ```
 
-### expose a memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
+### expose a Memcached service on custom host:port if provided (random port on the 0.0.0.0 interface if otherwise unspecified)
 
 ```shell
 # usage
@@ -340,7 +361,7 @@ Expose the service on the service's normal ports, with the first on a specified 
 dokku memcached:expose lollipop 127.0.0.1:11211
 ```
 
-### unexpose a previously exposed memcached service
+### unexpose a previously exposed Memcached service
 
 ```shell
 # usage
@@ -357,13 +378,13 @@ dokku memcached:unexpose lollipop
 
 ```shell
 # usage
-dokku memcached:promote <service> <app>
+dokku memcached:promote <service> [<app>]
 ```
 
 If you have a memcached service linked to an app and try to link another memcached service another link environment variable will be generated automatically:
 
 ```
-DOKKU_MEMCACHED_BLUE_URL=memcached://other_service:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
+DOKKU_MEMCACHED_BLUE_URL=memcached://:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
 ```
 
 You can promote the new service to be the primary one:
@@ -377,12 +398,12 @@ dokku memcached:promote other_service playground
 This will replace `MEMCACHED_URL` with the url from other_service and generate another environment variable to hold the previous value if necessary. You could end up with the following for example:
 
 ```
-MEMCACHED_URL=memcached://other_service:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
-DOKKU_MEMCACHED_BLUE_URL=memcached://other_service:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
-DOKKU_MEMCACHED_SILVER_URL=memcached://lollipop:SOME_PASSWORD@dokku-memcached-lollipop:11211/lollipop
+MEMCACHED_URL=memcached://:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
+DOKKU_MEMCACHED_BLUE_URL=memcached://:ANOTHER_PASSWORD@dokku-memcached-other-service:11211/other_service
+DOKKU_MEMCACHED_SILVER_URL=memcached://:SOME_PASSWORD@dokku-memcached-lollipop:11211/lollipop
 ```
 
-### start a previously stopped memcached service
+### start a previously stopped Memcached service
 
 ```shell
 # usage
@@ -395,7 +416,7 @@ Start the service:
 dokku memcached:start lollipop
 ```
 
-### stop a running memcached service
+### stop a running Memcached service
 
 ```shell
 # usage
@@ -408,7 +429,7 @@ Stop the service and removes the running container:
 dokku memcached:stop lollipop
 ```
 
-### pause a running memcached service
+### pause a running Memcached service
 
 ```shell
 # usage
@@ -421,7 +442,7 @@ Pause the running container for the service:
 dokku memcached:pause lollipop
 ```
 
-### graceful shutdown and restart of the memcached service container
+### graceful shutdown and restart of the Memcached service container
 
 ```shell
 # usage
@@ -443,15 +464,15 @@ dokku memcached:upgrade <service> [--upgrade-flags...]
 
 flags:
 
-- `-c|--config-options "--args --go=here"`: extra arguments to pass to the container create command (default: `None`)
-- `-C|--custom-env "USER=alpha;HOST=beta"`: semi-colon delimited environment variables to start the service with
-- `-i|--image IMAGE`: the image name to start the service with
-- `-I|--image-version IMAGE_VERSION`: the image version to start the service with
-- `-N|--initial-network INITIAL_NETWORK`: the initial network to attach the service to
-- `-P|--post-create-network NETWORKS`: a comma-separated list of networks to attach the service container to after service creation
-- `-R|--restart-apps "true"`: whether or not to force an app restart (default: false)
-- `-S|--post-start-network NETWORKS`: a comma-separated list of networks to attach the service container to after service start
-- `-s|--shm-size SHM_SIZE`: override shared memory size for memcached docker container
+- `-c|--config-options <string>`: extra arguments to pass to the container create command
+- `-C|--custom-env <string>`: semi-colon delimited environment variables to start the service with
+- `-i|--image <string>`: the image to upgrade the service to
+- `-I|--image-version <string>`: the image version to upgrade the service to
+- `-N|--initial-network <string>`: the initial network to attach the service to
+- `-P|--post-create-network <strings>`: a comma-separated list of networks to attach the service container to after service creation
+- `-S|--post-start-network <strings>`: a comma-separated list of networks to attach the service container to after service start
+- `-R|--restart-apps`: whether to stop and start the linked apps around the upgrade
+- `-s|--shm-size <string>`: override shared memory size for the service docker container
 
 You can upgrade an existing service to a new image or image-version:
 
@@ -463,11 +484,11 @@ dokku memcached:upgrade lollipop
 
 Service scripting can be executed using the following commands:
 
-### list all memcached service links for a given app
+### list all Memcached service links for a given app
 
 ```shell
 # usage
-dokku memcached:app-links <app>
+dokku memcached:app-links [<app>]
 ```
 
 List all memcached services that are linked to the `playground` app.
@@ -476,7 +497,7 @@ List all memcached services that are linked to the `playground` app.
 dokku memcached:app-links playground
 ```
 
-### check if the memcached service exists
+### check if the Memcached service exists
 
 ```shell
 # usage
@@ -489,11 +510,11 @@ Here we check if the lollipop memcached service exists.
 dokku memcached:exists lollipop
 ```
 
-### check if the memcached service is linked to an app
+### check if the Memcached service is linked to an app
 
 ```shell
 # usage
-dokku memcached:linked <service> <app>
+dokku memcached:linked <service> [<app>]
 ```
 
 Here we check if the lollipop memcached service is linked to the `playground` app.
@@ -502,7 +523,7 @@ Here we check if the lollipop memcached service is linked to the `playground` ap
 dokku memcached:linked lollipop playground
 ```
 
-### list all apps linked to the memcached service
+### list all apps linked to the Memcached service
 
 ```shell
 # usage
@@ -513,45 +534,6 @@ List all apps linked to the `lollipop` memcached service.
 
 ```shell
 dokku memcached:links lollipop
-```
-### Backups
-
-Datastore backups are supported via AWS S3 and S3 compatible services like [minio](https://github.com/minio/minio).
-
-You may skip the `backup-auth` step if your dokku install is running within EC2 and has access to the bucket via an IAM profile. In that case, use the `--use-iam` option with the `backup` command.
-
-If both passphrase and public key forms of encryption are set, the public key encryption will take precedence.
-
-The underlying core backup script is present [here](https://github.com/dokku/docker-s3backup/blob/main/backup.sh).
-
-Backups can be performed using the backup commands:
-
-### set GPG Public Key encryption for all future backups of memcached service
-
-```shell
-# usage
-dokku memcached:backup-set-public-key-encryption <service> <public-key-id>
-```
-
-Set the `GPG` Public Key for encrypting backups:
-
-```shell
-dokku memcached:backup-set-public-key-encryption lollipop
-```
-
-This method currently requires the <public-key-id> to be present on the keyserver `keyserver.ubuntu.com`:
-
-### unset GPG Public Key encryption for future backups of the memcached service
-
-```shell
-# usage
-dokku memcached:backup-unset-public-key-encryption <service>
-```
-
-Unset the `GPG` Public Key encryption for backups:
-
-```shell
-dokku memcached:backup-unset-public-key-encryption lollipop
 ```
 
 ### Disabling `docker image pull` calls
