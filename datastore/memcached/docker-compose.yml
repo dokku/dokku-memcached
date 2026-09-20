@@ -1,0 +1,48 @@
+---
+services:
+  memcached:
+    image: "{{ .Image }}:{{ .ImageVersion }}"
+
+    command:
+      - memcached
+      - -m
+      # memcached's cache size and the container's memory limit are the same
+      # number. An unset limit reaches a template as nothing rather than as
+      # zero, so the cache keeps the default the bash plugin used instead of
+      # being told to hold nothing.
+      - "{{ if .Memory }}{{ .Memory }}{{ else }}64{{ end }}"
+
+    # no volumes: memcached holds its data in memory and has nothing to persist,
+    # which is also why it has no export
+
+    ports:
+      - name: native
+        target: 11211
+        primary: true
+
+x-dokku:
+  plugin: memcached
+  title: Memcached
+  scheme: memcached
+  alias: MEMCACHED
+
+  # no credentials: memcached has no authentication, so there is no secret to
+  # generate and nothing to put in the url
+  dsn: "{{ .Scheme }}://{{ .Host }}:{{ .Port.native }}"
+
+  # the image ships no client, so nothing inside the container could answer a
+  # healthcheck
+  wait: native
+
+  commands:
+    connect:
+      # run beside the service rather than inside it, sharing its network
+      # namespace. The image has no client, which is why the bash plugin ran
+      # telnet on the host; this needs nothing installed on the host.
+      mode: sidecar
+      image: busybox:1.37.0-uclibc
+      exec: ["telnet", "127.0.0.1", "11211"]
+
+  # export and import are absent because there is nothing to dump: memcached is
+  # a cache. That is what makes clone and the backup family unavailable too,
+  # which is exactly the list the bash plugin maintained by hand.
