@@ -490,6 +490,12 @@ Connect to the service via the memcached connection tool:
 dokku memcached:connect lollipop
 ```
 
+The connection tool only shows a prompt when it is given a terminal, which ssh allocates when run with -t. Without a terminal, statements are read from stdin instead.
+
+```shell
+dokku memcached:connect lollipop < statements.txt
+```
+
 ### enter or run a command in a running Memcached service container
 
 ```shell
@@ -497,7 +503,7 @@ dokku memcached:connect lollipop
 dokku memcached:enter <service>
 ```
 
-A bash prompt can be opened against a running service. Filesystem changes will not be saved to disk.
+A shell can be opened against a running service. Filesystem changes will not be saved to disk.
 
 > NOTE: disconnecting from ssh while running this command may leave zombie processes due to moby/moby#9098
 
