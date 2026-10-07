@@ -43,6 +43,23 @@ x-dokku:
       image: busybox:1.37.0-uclibc
       exec: ["telnet", "127.0.0.1", "11211"]
 
+    # every item in the cache, beside the service for the same reason connect
+    # is. memcached answers OK once it has flushed, and anything else, or no
+    # answer at all, is a reset that did not happen
+    reset:
+      mode: sidecar
+      image: busybox:1.37.0-uclibc
+      exec:
+        - sh
+        - -c
+        - |
+          reply="$(printf 'flush_all\r\nquit\r\n' | nc -w 5 127.0.0.1 11211 | tr -d '\r')"
+          if [ "$reply" != OK ]; then
+            echo "unable to flush the service: ${reply:-no reply}" >&2
+            exit 1
+          fi
+        - dokku-memcached-reset
+
   # export and import are absent because there is nothing to dump: memcached is
   # a cache. That is what makes clone and the backup family unavailable too,
   # which is exactly the list the bash plugin maintained by hand.
