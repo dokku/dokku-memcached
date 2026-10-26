@@ -6,11 +6,13 @@ services:
     command:
       - memcached
       - -m
-      # memcached's cache size and the container's memory limit are the same
-      # number. An unset limit reaches a template as nothing rather than as
-      # zero, so the cache keeps the default the bash plugin used instead of
+      # the cache size is the service memory, which a new service is created
+      # with at the default below, apart from the container's memory limit so
+      # that a full cache is not the container being killed. A service made
+      # before there was one sized its cache by the limit, and keeps doing so,
+      # and one with neither keeps the default the bash plugin used instead of
       # being told to hold nothing.
-      - "{{ if .Memory }}{{ .Memory }}{{ else }}64{{ end }}"
+      - "{{ if .ServiceMemory }}{{ .ServiceMemory }}{{ else if .Memory }}{{ .Memory }}{{ else }}64{{ end }}"
 
     # no volumes: memcached holds its data in memory and has nothing to persist,
     # which is also why it has no export
@@ -33,6 +35,11 @@ x-dokku:
   # the image ships no client, so nothing inside the container could answer a
   # healthcheck
   wait: native
+
+  # memcached reads its cache size only when it starts, so there is no change
+  # to declare and a new size waits for the container to be made again
+  service_memory:
+    default: 64
 
   commands:
     connect:
